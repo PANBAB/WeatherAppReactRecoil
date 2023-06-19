@@ -18,9 +18,9 @@ const CitySelectNav = () => {
   return (
     <div className="CitySelect">
       {isImageOpen && <img src={myLogo} alt="drizzle" />}
-      {isTitleVisible && <h1>Drizzle App </h1>}
+      {isTitleVisible && <h1>Drizzle Weather </h1>}
 
-      <h1>City Select Navigation</h1>
+      <h1>Select a city:</h1>
       <ul>
         {isButtonVisible && (
           <Button variant="outlined" color="primary" onClick={handleCloseImage}>

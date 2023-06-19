@@ -1,77 +1,156 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  MenuItem,
+  FormControl,
+  Select,
+  InputLabel,
+} from "@mui/material";
+import ThreeSixtyIcon from "@mui/icons-material/ThreeSixty";
+
+import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice";
 
 const SplitCurrentData = () => {
-  const [data, setData] = useState(null);
+  const dispatch = useDispatch();
+  const weatherData = useSelector(selectWeatherData);
+  const [selectedHour, setSelectedHour] = useState(
+    new Date().getHours().toString()
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://api.open-meteo.com/v1/forecast?latitude=43.51&longitude=16.44&hourly=temperature_2m,precipitation,windspeed_180m,winddirection_180m,temperature_180m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FBerlin"
-        );
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    if (!weatherData) {
+      dispatch(fetchWeatherData());
+    }
+  }, [dispatch, weatherData]);
 
-    fetchData();
-  }, []);
+  const fetchData = () => {
+    dispatch(fetchWeatherData());
+  };
 
-  if (!data) {
-    return <div>Loading...</div>;
+  const handleHourSelect = (event) => {
+    setSelectedHour(event.target.value);
+  };
+
+  if (!weatherData) {
+    return (
+      <div>
+        <Button onClick={fetchData}>
+          Refresh <ThreeSixtyIcon />
+        </Button>
+      </div>
+    );
   }
 
-  const hourlyData = Array.isArray(data.hourly) ? data.hourly : [];
-  const dailyData = Array.isArray(data.daily) ? data.daily : [];
+  const { daily, hourly } = weatherData;
 
   return (
     <div>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h4">Hourly Weather</Typography>
-          {hourlyData.map((hour) => (
-            <Card key={hour.time}>
-              <CardContent>
-                <Typography variant="h5">Time: {hour.time}</Typography>
-                <Typography variant="h2">
-                  Temperature: {hour.temperature_2m} °C
-                </Typography>
-                <Typography variant="body1">
-                  Precipitation: {hour.precipitation} mm
-                </Typography>
-                <Typography variant="body1">
-                  Wind Speed: {hour.windspeed_180m} km/h
-                </Typography>
-                <Typography variant="body1">
-                  Wind Direction: {hour.winddirection_180m} °
-                </Typography>
-                <Typography variant="body1">
-                  Temperature (180 m): {hour.temperature_180m} °C
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
+      <Button onClick={fetchData}>
+        Refresh <ThreeSixtyIcon />
+      </Button>
+
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={9}>
+          <Typography variant="h3">Hourly Weather</Typography>
+          <FormControl
+            variant="filled"
+            color="primary"
+            sx={{ m: 1, minWidth: 120 }}
+          >
+            <InputLabel>Hour select</InputLabel>
+            <Select value={selectedHour} onChange={handleHourSelect}>
+              {hourly.time.map((time, index) => (
+                <MenuItem
+                  key={index}
+                  value={new Date(time).getHours().toString()}
+                >
+                  {new Date(time).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Grid container spacing={1}>
+            {hourly.time.map((time, index) => {
+              const hour = new Date(time).getHours();
+              if (hour.toString() === selectedHour) {
+                return (
+                  <Grid item xs={12} sm={4} key={index}>
+                    <Card>
+                      <CardContent>
+                        <Typography variant="h5">
+                          Weathercode/ Will be an icon:
+                          {hourly.weathercode[index]}
+                        </Typography>
+                        <Typography variant="h5">
+                          Temperature: {hourly.temperature_2m[index]} °C
+                        </Typography>
+                        <Typography variant="body1">
+                          Precipitation: {hourly.precipitation[index]} mm
+                        </Typography>
+                        <Typography variant="body1">
+                          Surface Pressure: {hourly.surface_pressure[index]} hPa
+                        </Typography>
+                        <Typography variant="body1">
+                          Wind Speed: {hourly.windspeed_180m[index]} km/h
+                        </Typography>
+                        <Typography variant="body1">
+                          Wind Direction: {hourly.winddirection_180m[index]} °
+                        </Typography>
+                        <Typography variant="body1">
+                          Temperature (180 m): {hourly.temperature_180m[index]}{" "}
+                          °C
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                );
+              }
+              return null;
+            })}
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h4">Daily Weather</Typography>
-          {dailyData.map((day) => (
-            <Card key={day.time}>
-              <CardContent>
-                <Typography variant="h5">Date: {day.time}</Typography>
-                <Typography variant="body1">
-                  Max Temperature: {day.temperature_2m_max} °C
-                </Typography>
-                <Typography variant="body1">
-                  Min Temperature: {day.temperature_2m_min} °C
-                </Typography>
-                <Typography variant="body1">Sunrise: {day.sunrise}</Typography>
-                <Typography variant="body1">Sunset: {day.sunset}</Typography>
-              </CardContent>
-            </Card>
-          ))}
+
+        <Grid item xs={12} sm={3}>
+          <Typography variant="h3">Daily Weather</Typography>
+          {daily.time.map((time, index) => {
+            const sunriseHour = new Date(daily.sunrise[index]).getHours();
+            const sunriseMinute = new Date(daily.sunrise[index]).getMinutes();
+            const sunsetHour = new Date(daily.sunset[index]).getHours();
+            const sunsetMinute = new Date(daily.sunset[index]).getMinutes();
+            const sunrise = `${sunriseHour}:${sunriseMinute}`;
+            const sunset = `${sunsetHour}:${sunsetMinute}`;
+
+            return (
+              <Card key={index}>
+                <CardContent>
+                  <Typography variant="h5">
+                    Weathercode/ Will be an icon:
+                    {hourly.weathercode[index]}
+                  </Typography>
+                  <Typography variant="h5">Date: {time}</Typography>
+                  <Typography variant="body1">
+                    Max Temperature: {daily.temperature_2m_max[index]} °C
+                  </Typography>
+                  <Typography variant="body1">
+                    Min Temperature: {daily.temperature_2m_min[index]} °C
+                  </Typography>
+                  <Typography variant="body1">
+                    Sunrise: {sunrise} am{" "}
+                  </Typography>
+                  <Typography variant="body1">Sunset: {sunset} pm</Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
         </Grid>
       </Grid>
     </div>

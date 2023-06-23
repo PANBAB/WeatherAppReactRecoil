@@ -12,7 +12,7 @@ export const fetchWeatherData = createAsyncThunk(
 );
 
 const weatherSlice = createSlice({
-  name: "weather",
+  name: "Weather",
   initialState: null,
   reducers: {
     setWeatherData: (state, action) => {

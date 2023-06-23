@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,9 +12,9 @@ import {
   Select,
   InputLabel,
 } from "@mui/material";
-import ThreeSixtyIcon from "@mui/icons-material/ThreeSixty";
 
-import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice";
+import WeatherIconComponent from "./WeatherIconComponent";
+import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice.jsx";
 
 const SplitCurrentData = () => {
   const dispatch = useDispatch();
@@ -37,47 +38,42 @@ const SplitCurrentData = () => {
   };
 
   if (!weatherData) {
-    return (
-      <div>
-        <Button onClick={fetchData}>
-          Refresh <ThreeSixtyIcon />
-        </Button>
-      </div>
-    );
+    return <div></div>;
   }
 
   const { daily, hourly } = weatherData;
 
   return (
     <div>
-      <Button onClick={fetchData}>
-        Refresh <ThreeSixtyIcon />
-      </Button>
-
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={9}>
-          <Typography variant="h3">Hourly Weather</Typography>
-          <FormControl
-            variant="filled"
-            color="primary"
-            sx={{ m: 1, minWidth: 120 }}
-          >
-            <InputLabel>Hour select</InputLabel>
-            <Select value={selectedHour} onChange={handleHourSelect}>
-              {hourly.time.map((time, index) => (
-                <MenuItem
-                  key={index}
-                  value={new Date(time).getHours().toString()}
-                >
-                  {new Date(time).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                  })}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+        <Grid item xs={12} sm={9} container alignItems="center">
+          <Grid item>
+            <Typography variant="h3">Hourly Weather</Typography>
+          </Grid>
+          <Grid item>
+            <FormControl
+              variant="standard"
+              color="primary"
+              sx={{ m: 1, minWidth: 120 }}
+            >
+              <InputLabel>Hour select</InputLabel>
+              <Select value={selectedHour} onChange={handleHourSelect}>
+                {hourly.time.map((time, index) => (
+                  <MenuItem
+                    key={index}
+                    value={new Date(time).getHours().toString()}
+                  >
+                    {new Date(time).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
           <Grid container spacing={1}>
             {hourly.time.map((time, index) => {
               const hour = new Date(time).getHours();
@@ -87,9 +83,11 @@ const SplitCurrentData = () => {
                     <Card>
                       <CardContent>
                         <Typography variant="h5">
-                          Weathercode/ Will be an icon:
-                          {hourly.weathercode[index]}
+                          <WeatherIconComponent
+                            code={hourly.weathercode[index]}
+                          />
                         </Typography>
+
                         <Typography variant="h5">
                           Temperature: {hourly.temperature_2m[index]} °C
                         </Typography>
@@ -133,8 +131,7 @@ const SplitCurrentData = () => {
               <Card key={index}>
                 <CardContent>
                   <Typography variant="h5">
-                    Weathercode/ Will be an icon:
-                    {hourly.weathercode[index]}
+                    <WeatherIconComponent code={hourly.weathercode[index]} />
                   </Typography>
                   <Typography variant="h5">Date: {time}</Typography>
                   <Typography variant="body1">
@@ -152,6 +149,9 @@ const SplitCurrentData = () => {
             );
           })}
         </Grid>
+        <Button variant="outlined">
+          <Link to="/split-historical">Split Historical data</Link>
+        </Button>
       </Grid>
     </div>
   );

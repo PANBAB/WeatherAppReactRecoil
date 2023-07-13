@@ -15,13 +15,13 @@ import {
   TableRow,
   Collapse,
 } from "@mui/material";
-import ThreeSixtyIcon from "@mui/icons-material/ThreeSixty";
 import WeatherIconComponent from "./WeatherIconComponent";
 
 import {
   fetchHistoricalWeatherData,
   selectHistoricalWeatherData,
 } from "../redux/HistoricalWeatherSlice.jsx";
+import "./Loader.css";
 
 const SplitHistoricalData = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const SplitHistoricalData = () => {
     return (
       <div>
         <Button onClick={fetchHistoricalData}>
-          Refresh <ThreeSixtyIcon />
+          <div class="lds-dual-ring"></div>
         </Button>
       </div>
     );

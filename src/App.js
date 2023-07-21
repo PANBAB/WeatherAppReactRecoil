@@ -7,6 +7,18 @@ import PortoCurrentData from "./Components/PortoCurrentData";
 import PortoHistoricalData from "./Components/PortoHistoricalData";
 import MarseilleCurrentData from "./Components/MarseilleCurrentData";
 import MarseilleHistoricalData from "./Components/MarseilleHistoricalData";
+import LondonCurrentData from "./Components/LondonCurrentData";
+import LondonHistoricalData from "./Components/LondonHistoricalData";
+import BerlinCurrentData from "./Components/BerlinCurrentData";
+import BerlinHistoricalData from "./Components/BerlinHistoricalData";
+import IstanbulCurrentData from "./Components/IstanbulCurrentData";
+import IstanbulHistoricalData from "./Components/IstanbulHistoricalData";
+import TinjCurrentData from "./Components/TinjCurrentData";
+import TinjHistoricalData from "./Components/TinjHistoricalData";
+//Experimental Baku
+import BakuCurrentData from "./Components/BakuCurrentData";
+import BakuHistoricalData from "./Components/BakuHistoricalData";
+
 import CitySelectNav from "./CitySelectNav";
 
 function App() {
@@ -32,6 +44,19 @@ function App() {
           element={<MarseilleHistoricalData />}
         />
         <Route path="/porto-historical" element={<PortoHistoricalData />} />
+        <Route path="/london" element={<LondonCurrentData />} />
+        <Route path="/london-historical" element={<LondonHistoricalData />} />
+        <Route path="/berlin" element={<BerlinCurrentData />} />
+        <Route path="/berlin-historical" element={<BerlinHistoricalData />} />
+        <Route path="/istanbul" element={<IstanbulCurrentData />} />
+        <Route
+          path="/istanbul-historical"
+          element={<IstanbulHistoricalData />}
+        />
+        <Route path="/baku" element={<BakuCurrentData />} />
+        <Route path="/baku-historical" element={<BakuHistoricalData />} />
+        <Route path="/tinj" element={<TinjCurrentData />} />
+        <Route path="/tinj-historical" element={<TinjHistoricalData />} />
       </Routes>
     </div>
   );

@@ -33,10 +33,6 @@ const PortoCurrentData = () => {
     }
   }, [dispatch, PortoWeatherData]);
 
-  const fetchData = () => {
-    dispatch(fetchPortoWeatherData());
-  };
-
   const handleHourSelect = (event) => {
     setSelectedHour(event.target.value);
   };
@@ -154,7 +150,7 @@ const PortoCurrentData = () => {
           })}
         </Grid>
         <Button variant="outlined">
-          <Link to="/split-historical">Porto Historical data</Link>
+          <Link to="/porto-historical">Porto Historical data</Link>
         </Button>
         <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>

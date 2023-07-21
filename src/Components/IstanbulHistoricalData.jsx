@@ -19,37 +19,37 @@ import WeatherIconComponent from "./WeatherIconComponent";
 import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 
 import {
-  fetchHistoricalWeatherData,
-  selectHistoricalWeatherData,
-} from "../redux/HistoricalWeatherSlice.jsx";
+  fetchIstanbulHistoricalData,
+  selectIstanbulHistoricalData,
+} from "../redux/IstanbulHistoricalWeatherSlice";
 import "./Loader.css";
 
-const SplitHistoricalData = () => {
+const IstanbulHistoricalData = () => {
   const dispatch = useDispatch();
-  const historicalWeatherData = useSelector(selectHistoricalWeatherData);
+  const istanbulHistoricalData = useSelector(selectIstanbulHistoricalData);
   const [expandedIndex, setExpandedIndex] = React.useState(null);
 
   useEffect(() => {
-    if (!historicalWeatherData) {
-      dispatch(fetchHistoricalWeatherData());
+    if (!istanbulHistoricalData) {
+      dispatch(fetchIstanbulHistoricalData());
     }
-  }, [dispatch, historicalWeatherData]);
+  }, [dispatch, istanbulHistoricalData]);
 
   const fetchHistoricalData = () => {
-    dispatch(fetchHistoricalWeatherData());
+    dispatch(fetchIstanbulHistoricalData());
   };
 
-  if (!historicalWeatherData || !historicalWeatherData.daily) {
+  if (!istanbulHistoricalData || !istanbulHistoricalData.daily) {
     return (
       <div>
         <Button onClick={fetchHistoricalData}>
-          <div class="lds-dual-ring"></div>
+          <div className="lds-dual-ring"></div>
         </Button>
       </div>
     );
   }
 
-  const { daily } = historicalWeatherData;
+  const { daily } = istanbulHistoricalData;
 
   const handleCardToggle = (index) => {
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -58,7 +58,7 @@ const SplitHistoricalData = () => {
   return (
     <div>
       <Button variant="outlined">
-        <Link to="/">Split current weather </Link>
+        <Link to="/istanbul">Istanbul current weather</Link>
         <ReplyAllIcon fontSize="small" />
       </Button>
       <Grid container spacing={1}>
@@ -96,7 +96,7 @@ const SplitHistoricalData = () => {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell colSpan={8}>
+                      <TableCell colSpan={5}>
                         <Collapse in={expandedIndex === index}>
                           <Card>
                             <CardContent>
@@ -147,4 +147,4 @@ const SplitHistoricalData = () => {
   );
 };
 
-export default SplitHistoricalData;
+export default IstanbulHistoricalData;

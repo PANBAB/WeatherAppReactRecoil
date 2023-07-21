@@ -12,40 +12,48 @@ import {
   Select,
   InputLabel,
 } from "@mui/material";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
 
 import WeatherIconComponent from "./WeatherIconComponent";
-import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice.jsx";
+import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import {
+  fetchBakuWeatherData,
+  selectBakuWeatherData,
+} from "../redux/BakuWeatherSlice";
 
-const SplitCurrentData = () => {
+const BakuCurrentData = () => {
   const dispatch = useDispatch();
-  const weatherData = useSelector(selectWeatherData);
+  const BakuweatherData = useSelector(selectBakuWeatherData);
   const [selectedHour, setSelectedHour] = useState(
     new Date().getHours().toString()
   );
 
   useEffect(() => {
-    if (!weatherData) {
-      dispatch(fetchWeatherData());
+    if (!BakuweatherData) {
+      dispatch(fetchBakuWeatherData());
     }
-  }, [dispatch, weatherData]);
+  }, [dispatch, BakuweatherData]);
 
   const handleHourSelect = (event) => {
     setSelectedHour(event.target.value);
   };
 
-  if (!weatherData) {
+  if (!BakuweatherData) {
     return <div></div>;
   }
 
-  const { daily, hourly } = weatherData;
+  const { daily, hourly } = BakuweatherData;
 
   return (
     <div>
+      <Button variant="outlined">
+        <Link to="/baku-historical">Baku Historical data</Link>
+        <HistoryRoundedIcon fontSize="medium" color="primary" />
+      </Button>
+
       <Grid container spacing={1}>
         <Grid item xs={12} sm={9} container alignItems="center">
           <Grid item>
-            <Typography variant="h3">Hourly Weather </Typography>
+            <Typography variant="h3">Hourly Weather</Typography>
           </Grid>
           <Grid item>
             <FormControl
@@ -72,45 +80,51 @@ const SplitCurrentData = () => {
           </Grid>
 
           <Grid container spacing={1}>
-            {hourly.time.map((time, index) => {
-              const hour = new Date(time).getHours();
-              if (hour.toString() === selectedHour) {
-                return (
-                  <Grid item xs={12} sm={4} key={index}>
-                    <Card>
-                      <CardContent>
-                        <Typography variant="h5">
-                          <WeatherIconComponent
-                            code={hourly.weathercode[index]}
-                          />
-                        </Typography>
-
-                        <Typography variant="h5">
-                          Temperature: {hourly.temperature_2m[index]} °C
-                        </Typography>
-                        <Typography variant="body1">
-                          Precipitation: {hourly.precipitation[index]} mm
-                        </Typography>
-                        <Typography variant="body1">
-                          Surface Pressure: {hourly.surface_pressure[index]} hPa
-                        </Typography>
-                        <Typography variant="body1">
-                          Wind Speed: {hourly.windspeed_180m[index]} km/h
-                        </Typography>
-                        <Typography variant="body1">
-                          Wind Direction: {hourly.winddirection_180m[index]} °
-                        </Typography>
-                        <Typography variant="body1">
-                          Temperature (180 m): {hourly.temperature_180m[index]}{" "}
-                          °C
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              }
-              return null;
-            })}
+            {hourly &&
+              hourly.time &&
+              hourly.time.map((time, index) => {
+                const hour = new Date(time).getHours();
+                if (hour.toString() === selectedHour) {
+                  return (
+                    <Grid item xs={12} sm={4} key={index}>
+                      <Card>
+                        <CardContent>
+                          <Typography variant="h5">
+                            <WeatherIconComponent
+                              code={hourly.weathercode[index]}
+                            />
+                          </Typography>
+                          <Typography variant="h5">
+                            Temperature: {hourly.temperature_2m[index]} °C
+                          </Typography>
+                          {hourly.precipitation && (
+                            <Typography variant="body1">
+                              Precipitation: {hourly.precipitation[index]} mm
+                            </Typography>
+                          )}
+                          {hourly.surface_pressure && (
+                            <Typography variant="body1">
+                              Surface Pressure: {hourly.surface_pressure[index]}{" "}
+                              hPa
+                            </Typography>
+                          )}
+                          <Typography variant="body1">
+                            Wind Speed: {hourly.windspeed_180m[index]} km/h
+                          </Typography>
+                          <Typography variant="body1">
+                            Wind Direction: {hourly.winddirection_180m[index]} °
+                          </Typography>
+                          <Typography variant="body1">
+                            Temperature (180 m):{" "}
+                            {hourly.temperature_180m[index]} °C
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                }
+                return null;
+              })}
           </Grid>
         </Grid>
 
@@ -146,13 +160,9 @@ const SplitCurrentData = () => {
             );
           })}
         </Grid>
-        <Button variant="outlined">
-          <Link to="/split-historical">Split Historical data</Link>
-        </Button>
-        <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
     </div>
   );
 };
 
-export default SplitCurrentData;
+export default BakuCurrentData;

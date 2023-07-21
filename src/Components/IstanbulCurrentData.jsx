@@ -15,37 +15,40 @@ import {
 import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
 
 import WeatherIconComponent from "./WeatherIconComponent";
-import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice.jsx";
+import {
+  fetchIstanbulWeatherData,
+  selectIstanbulWeatherData,
+} from "../redux/IstanbulWeatherSlice";
 
-const SplitCurrentData = () => {
+const IstanbulCurrentData = () => {
   const dispatch = useDispatch();
-  const weatherData = useSelector(selectWeatherData);
+  const IstanbulWeatherData = useSelector(selectIstanbulWeatherData);
   const [selectedHour, setSelectedHour] = useState(
     new Date().getHours().toString()
   );
 
   useEffect(() => {
-    if (!weatherData) {
-      dispatch(fetchWeatherData());
+    if (!IstanbulWeatherData) {
+      dispatch(fetchIstanbulWeatherData());
     }
-  }, [dispatch, weatherData]);
+  }, [dispatch, IstanbulWeatherData]);
 
   const handleHourSelect = (event) => {
     setSelectedHour(event.target.value);
   };
 
-  if (!weatherData) {
+  if (!IstanbulWeatherData) {
     return <div></div>;
   }
 
-  const { daily, hourly } = weatherData;
+  const { daily, hourly } = IstanbulWeatherData;
 
   return (
     <div>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={9} container alignItems="center">
           <Grid item>
-            <Typography variant="h3">Hourly Weather </Typography>
+            <Typography variant="h3">Hourly Weather</Typography>
           </Grid>
           <Grid item>
             <FormControl
@@ -147,7 +150,7 @@ const SplitCurrentData = () => {
           })}
         </Grid>
         <Button variant="outlined">
-          <Link to="/split-historical">Split Historical data</Link>
+          <Link to="/istanbul-historical">Istanbul Historical data</Link>
         </Button>
         <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
@@ -155,4 +158,4 @@ const SplitCurrentData = () => {
   );
 };
 
-export default SplitCurrentData;
+export default IstanbulCurrentData;

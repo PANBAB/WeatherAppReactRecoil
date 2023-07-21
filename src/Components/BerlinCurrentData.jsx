@@ -15,37 +15,40 @@ import {
 import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
 
 import WeatherIconComponent from "./WeatherIconComponent";
-import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice.jsx";
+import {
+  fetchBerlinWeatherData,
+  selectBerlinWeatherData,
+} from "../redux/BerlinWeatherSlice";
 
-const SplitCurrentData = () => {
+const BerlinCurrentData = () => {
   const dispatch = useDispatch();
-  const weatherData = useSelector(selectWeatherData);
+  const BerlinWeatherData = useSelector(selectBerlinWeatherData);
   const [selectedHour, setSelectedHour] = useState(
     new Date().getHours().toString()
   );
 
   useEffect(() => {
-    if (!weatherData) {
-      dispatch(fetchWeatherData());
+    if (!BerlinWeatherData) {
+      dispatch(fetchBerlinWeatherData());
     }
-  }, [dispatch, weatherData]);
+  }, [dispatch, BerlinWeatherData]);
 
   const handleHourSelect = (event) => {
     setSelectedHour(event.target.value);
   };
 
-  if (!weatherData) {
+  if (!BerlinWeatherData) {
     return <div></div>;
   }
 
-  const { daily, hourly } = weatherData;
+  const { daily, hourly } = BerlinWeatherData;
 
   return (
     <div>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={9} container alignItems="center">
           <Grid item>
-            <Typography variant="h3">Hourly Weather </Typography>
+            <Typography variant="h3">Hourly Weather</Typography>
           </Grid>
           <Grid item>
             <FormControl
@@ -147,7 +150,7 @@ const SplitCurrentData = () => {
           })}
         </Grid>
         <Button variant="outlined">
-          <Link to="/split-historical">Split Historical data</Link>
+          <Link to="/berlin-historical">Berlin Historical data</Link>
         </Button>
         <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
@@ -155,4 +158,4 @@ const SplitCurrentData = () => {
   );
 };
 
-export default SplitCurrentData;
+export default BerlinCurrentData;

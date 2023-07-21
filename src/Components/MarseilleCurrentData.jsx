@@ -33,10 +33,6 @@ const MarseilleCurrentData = () => {
     }
   }, [dispatch, MarseilleweatherData]);
 
-  const fetchData = () => {
-    dispatch(fetchMarseilleWeatherData());
-  };
-
   const handleHourSelect = (event) => {
     setSelectedHour(event.target.value);
   };

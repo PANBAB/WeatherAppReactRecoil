@@ -16,6 +16,7 @@ import {
   Collapse,
 } from "@mui/material";
 import WeatherIconComponent from "./WeatherIconComponent";
+import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 
 import {
   fetchMarseilleHistoricalData,
@@ -57,7 +58,8 @@ const MarseilleHistoricalData = () => {
   return (
     <div>
       <Button variant="outlined">
-        <Link to="/">Current weather forecast</Link>
+        <Link to="/marseille">Marseille current weather</Link>
+        <ReplyAllIcon fontSize="small" />
       </Button>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={12}>

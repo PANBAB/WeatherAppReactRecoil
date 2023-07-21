@@ -30,6 +30,11 @@ const CitySelectNav = () => {
     { name: "Split", path: "/" },
     { name: "Marseille", path: "/marseille" },
     { name: "Porto", path: "/porto" },
+    { name: "London", path: "/london" },
+    { name: "Berlin", path: "/berlin" },
+    { name: "Istanbul", path: "/istanbul" },
+    { name: "Tinj ", path: "/tinj" },
+    { name: "Baku(Experimental)", path: "/baku" },
   ];
 
   const handleCityChange = (event) => {
@@ -71,7 +76,7 @@ const CitySelectNav = () => {
       {isTitleVisible && <h1>Drizzle Weather</h1>}
 
       <h1>Select a city:</h1>
-      <RadioGroup value={selectedCity} onChange={handleCityChange}>
+      <RadioGroup row value={selectedCity} onChange={handleCityChange}>
         {cities.map((city) => (
           <FormControlLabel
             key={city.path}

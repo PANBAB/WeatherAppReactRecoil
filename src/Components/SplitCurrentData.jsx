@@ -80,9 +80,11 @@ const SplitCurrentData = () => {
                     <Card>
                       <CardContent>
                         <Typography variant="h5">
-                          <WeatherIconComponent
-                            code={hourly.weathercode[index]}
-                          />
+                          <div className="iconContainer">
+                            <WeatherIconComponent
+                              code={hourly.weathercode[index]}
+                            />
+                          </div>
                         </Typography>
 
                         <Typography variant="h5">
@@ -128,7 +130,9 @@ const SplitCurrentData = () => {
               <Card key={index}>
                 <CardContent>
                   <Typography variant="h5">
-                    <WeatherIconComponent code={hourly.weathercode[index]} />
+                    <div className="iconContainer">
+                      <WeatherIconComponent code={hourly.weathercode[index]} />
+                    </div>
                   </Typography>
                   <Typography variant="h5">Date: {time}</Typography>
                   <Typography variant="body1">

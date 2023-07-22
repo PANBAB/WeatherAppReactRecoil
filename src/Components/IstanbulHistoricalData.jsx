@@ -101,9 +101,11 @@ const IstanbulHistoricalData = () => {
                           <Card>
                             <CardContent>
                               <Typography variant="h5">
-                                <WeatherIconComponent
-                                  code={daily.weathercode[index]}
-                                />
+                                <div className="iconContainer">
+                                  <WeatherIconComponent
+                                    code={daily.weathercode[index]}
+                                  />
+                                </div>
                               </Typography>
                               <Typography variant="body1">
                                 Max Temperature:{" "}

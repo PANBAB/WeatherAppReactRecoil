@@ -58,7 +58,7 @@ const LondonHistoricalData = () => {
   return (
     <div>
       <Button variant="outlined">
-        <Link to="/london">to London current weather</Link>
+        <Link to="/london">London current weather</Link>
         <ReplyAllIcon fontSize="small" />
       </Button>
       <Grid container spacing={1}>
@@ -101,9 +101,11 @@ const LondonHistoricalData = () => {
                           <Card>
                             <CardContent>
                               <Typography variant="h5">
-                                <WeatherIconComponent
-                                  code={daily.weathercode[index]}
-                                />
+                                <div className="iconContainer">
+                                  <WeatherIconComponent
+                                    code={daily.weathercode[index]}
+                                  />
+                                </div>
                               </Typography>
                               <Typography variant="body1">
                                 Max Temperature:{" "}

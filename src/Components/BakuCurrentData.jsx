@@ -19,6 +19,7 @@ import {
   fetchBakuWeatherData,
   selectBakuWeatherData,
 } from "../redux/BakuWeatherSlice";
+import { AZ } from "country-flag-icons/react/3x2";
 
 const BakuCurrentData = () => {
   const dispatch = useDispatch();
@@ -45,10 +46,10 @@ const BakuCurrentData = () => {
 
   return (
     <div>
-      <Button variant="outlined">
-        <Link to="/baku-historical">Baku Historical data</Link>
-        <HistoryRoundedIcon fontSize="medium" color="primary" />
-      </Button>
+      <div>
+        <h1>Country</h1>
+        <AZ className="flagIconContainer" />
+      </div>
 
       <Grid container spacing={1}>
         <Grid item xs={12} sm={9} container alignItems="center">
@@ -90,9 +91,11 @@ const BakuCurrentData = () => {
                       <Card>
                         <CardContent>
                           <Typography variant="h5">
-                            <WeatherIconComponent
-                              code={hourly.weathercode[index]}
-                            />
+                            <div className="iconContainer">
+                              <WeatherIconComponent
+                                code={hourly.weathercode[index]}
+                              />
+                            </div>
                           </Typography>
                           <Typography variant="h5">
                             Temperature: {hourly.temperature_2m[index]} °C
@@ -142,7 +145,9 @@ const BakuCurrentData = () => {
               <Card key={index}>
                 <CardContent>
                   <Typography variant="h5">
-                    <WeatherIconComponent code={hourly.weathercode[index]} />
+                    <div className="iconContainer">
+                      <WeatherIconComponent code={hourly.weathercode[index]} />
+                    </div>
                   </Typography>
                   <Typography variant="h5">Date: {time}</Typography>
                   <Typography variant="body1">
@@ -160,6 +165,10 @@ const BakuCurrentData = () => {
             );
           })}
         </Grid>
+        <Button variant="outlined">
+          <Link to="/baku-historical">Baku Historical data</Link>
+          <HistoryRoundedIcon fontSize="medium" color="primary" />
+        </Button>
       </Grid>
     </div>
   );

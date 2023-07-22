@@ -1,0 +1,19 @@
+.iconContainer {
+  display: flex;
+  justify-content: left;
+  height: 50%;
+}
+
+.iconContainer svg {
+  width: 7em; 
+  height:7em; 
+  ;
+}
+
+.flagIconContainer {
+  display: flex;
+  border-radius: 50%;
+  height: 4em;
+  width: 4em;
+
+}

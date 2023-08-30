@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 const myLogo = require("./sTORMY.gif");
+const footerLogo = require("./Drizzle.jpg");
 
 const CitySelectNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -88,6 +89,25 @@ const CitySelectNav = () => {
           />
         ))}
       </RadioGroup>
+
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 10,
+          width: "100%",
+          backgroundColor: "#333",
+          borderTop: "2px solid yellow",
+          padding: "10px",
+          display: "flex",
+        }}
+      >
+        <div>
+          <img src={footerLogo} alt="drizzle" style={{ width: "15%" }} />
+        </div>
+        <div style={{ color: "white" }}>Contact: antepetarb@gmail.com</div>
+      </div>
     </div>
   );
 };

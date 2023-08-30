@@ -1,13 +1,14 @@
 .iconContainer {
-  display: flex;
-  justify-content: left;
-  height: 50%;
+  text-align: center;
+  flex: 0 0 30px; 
+  margin-right: 10px; 
 }
 
 .iconContainer svg {
   width: 7em; 
   height:7em; 
   ;
+  
 }
 
 .flagIconContainer {
@@ -16,4 +17,15 @@
   height: 4em;
   width: 4em;
 
+
 }
+
+
+
+body {
+  background-color: #b0cee3fd; 
+  font-family: Arial, sans-serif; 
+}
+
+
+

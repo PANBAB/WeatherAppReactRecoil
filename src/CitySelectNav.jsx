@@ -45,28 +45,24 @@ const CitySelectNav = () => {
   };
 
   return (
-    <div className="CitySelect">
-      <Modal
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Card sx={{ maxWidth: 600, my: 100 }}>
+    <div className="CitySelect" style={styles.container}>
+      <Modal open={isModalOpen} onClose={handleCloseModal} style={styles.modal}>
+        <Card sx={styles.card}>
           <CardContent>
-            <Typography variant="h5" component="div" align="center">
-              <img src={myLogo} alt="drizzle" style={{ width: "100%" }} />
+            <Typography
+              variant="h5"
+              component="div"
+              align="center"
+              borderRadius={"10%"}
+            >
+              <img src={myLogo} alt="drizzle" style={styles.logo} />
             </Typography>
           </CardContent>
-          <CardActions sx={{ justifyContent: "center" }}>
+          <CardActions sx={styles.cardActions}>
             <Button
               variant="contained"
               onClick={handleCloseModal}
-              style={{ cursor: "pointer" }}
-              disableElevation
+              style={styles.continueButton}
             >
               Click anywhere to continue
             </Button>
@@ -74,42 +70,146 @@ const CitySelectNav = () => {
         </Card>
       </Modal>
 
-      {isTitleVisible && <h1>Drizzle Weather</h1>}
-
       <h1>Select a city:</h1>
       <RadioGroup row value={selectedCity} onChange={handleCityChange}>
         {cities.map((city) => (
           <FormControlLabel
             key={city.path}
             value={city.path}
-            control={<Radio />}
+            control={<Radio style={styles.radio} />}
             label={city.name}
             labelPlacement="end"
-            boxshadow={1}
           />
         ))}
       </RadioGroup>
 
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 10,
-          width: "100%",
-          backgroundColor: "#333",
-          borderTop: "2px solid yellow",
-          padding: "10px",
-          display: "flex",
-        }}
-      >
-        <div>
-          <img src={footerLogo} alt="drizzle" style={{ width: "15%" }} />
+      <div style={styles.footer}>
+        <div style={styles.logoContainer}>
+          <img src={footerLogo} alt="drizzle" style={styles.footerLogo} />
         </div>
-        <div style={{ color: "white" }}>Contact: antepetarb@gmail.com</div>
+        <div style={styles.footerContent}>
+          <Typography variant="body2" style={styles.footerText}>
+            © 2023 Drizzle Weather App
+          </Typography>
+          <Typography variant="body2" style={styles.footerText}>
+            All rights reserved
+          </Typography>
+          <Typography variant="body2" style={styles.footerText}>
+            Made with <span style={styles.heart}>❤️</span> by{" "}
+            <a
+              href="https://github.com/PANBAB"
+              target="_blank"
+              rel="noreferrer"
+              style={styles.link}
+            >
+              Ante Petar
+            </a>
+            <br />
+            <a href="mailto:antepetarb@gmail.com" style={styles.emailLink}>
+              Click to contact me by mail
+            </a>
+          </Typography>
+        </div>
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: null,
+  },
+
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+  },
+  card: {
+    maxWidth: 600,
+    margin: "100px auto",
+  },
+  logo: {
+    width: "100%",
+  },
+  cardActions: {
+    justifyContent: "center",
+  },
+  continueButton: {
+    cursor: "pointer",
+    backgroundColor: "#007acc",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#005faa",
+    },
+  },
+  h1: {
+    textAlign: "left",
+    color: "#123",
+  },
+
+  title: {
+    textAlign: "center",
+    color: "#333",
+  },
+  cityTitle: {
+    textAlign: "center",
+    color: "#333",
+  },
+  citySelect: {
+    textAlign: "center",
+
+    color: "#fca311",
+    margin: "1em",
+  },
+
+  footer: {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    backgroundColor: "#0096c7",
+    borderTop: "2px solid yellow",
+    padding: "10px",
+    display: "flex",
+    alignItems: "center",
+    borderTopRightRadius: "100%",
+  },
+  logoContainer: {
+    marginLeft: "20px",
+  },
+  footerLogo: {
+    width: "10%",
+  },
+  footerContent: {
+    color: "#fca311",
+  },
+  footerText: {
+    margin: 0,
+  },
+  heart: {
+    color: "red",
+  },
+  link: {
+    color: "#fca311",
+    fontweight: "bold",
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  emailLink: {
+    color: "#ade8f4",
+
+    textDecoration: "none",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 };
 
 export default CitySelectNav;

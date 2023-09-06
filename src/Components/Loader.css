@@ -3,12 +3,14 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
+    background-color: none;
+
   }
   
   .lds-dual-ring:after {
     content: " ";
-    display: block;
+    display: flex;
     width: 15em; 
     height: 15em;
     margin: 1em;
@@ -16,7 +18,8 @@
     border: 1.5em solid #4cc9f0; 
     border-color: #4cc9f0 transparent #f0cc4c transparent;
     animation: lds-dual-ring 1.2s linear infinite;
-  }
+    background-color: none;
+     }
   
   @keyframes lds-dual-ring {
     0% {

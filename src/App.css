@@ -20,12 +20,35 @@
 
 }
 
-
-
 body {
-  background-color: #b0cee3fd; 
+  background-image:url("https://images.unsplash.com/photo-1530293959042-0aac487c21e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"); 
   font-family: Arial, sans-serif; 
+  background-repeat: no-repeat;
+    background-size: cover;
 }
+
+h1 {
+  text-align: left;
+  font-size: 2.4em;
+  color: #fca311;
+  background-color:none;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+}
+
+a:visited
+{
+  color: black;
+}
+
+*{
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  }
+ 
+
 
 
 

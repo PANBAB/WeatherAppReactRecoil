@@ -28,14 +28,26 @@ body {
 }
 
 h1 {
-  text-align: left;
-  font-size: 2.4em;
-  color: #fca311;
-  background-color:none;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 400;
-  font-size: 3rem;
+  height: 100%;
+	margin: 0;
+	background-image: linear-gradient(to bottom right,#03045e,#023e8a, #0077b6, #0096c7, #00b4d8, #48cae4, #90e0ef, #ade8f4, #caf0f8);  
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #fff;
+  position: relative;
+	width:99.2%;
+	min-width: 300px;
+	height: 50px;
+	border: 10px solid transparent;
+	border-top: 10px solid #fffa;
+	border-left: 10px solid #fffa;
+	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25) inset;
 }
+
+
+
 
 a:visited
 {

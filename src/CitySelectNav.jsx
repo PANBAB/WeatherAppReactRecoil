@@ -171,8 +171,8 @@ const styles = {
     left: 0,
     right: 0,
     width: "100%",
-    backgroundColor: "#0096c7",
-    borderTop: "2px solid yellow",
+    backgroundImage: "linear-gradient (to right, #03045e  , #023e8a)",
+    borderTop: "16px solid yellow",
     padding: "10px",
     display: "flex",
     alignItems: "center",
@@ -185,7 +185,7 @@ const styles = {
     width: "10%",
   },
   footerContent: {
-    color: "#fca311",
+    color: "#ae2012",
   },
   footerText: {
     margin: 0,
@@ -194,7 +194,7 @@ const styles = {
     color: "red",
   },
   link: {
-    color: "#fca311",
+    color: "#ae2012",
     fontweight: "bold",
     textDecoration: "none",
     "&:hover": {
@@ -202,7 +202,7 @@ const styles = {
     },
   },
   emailLink: {
-    color: "#ade8f4",
+    color: "#ee9b00",
 
     textDecoration: "none",
 

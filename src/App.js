@@ -19,6 +19,7 @@ import TinjHistoricalData from "./Components/TinjHistoricalData";
 import BakuCurrentData from "./Components/BakuCurrentData";
 import BakuHistoricalData from "./Components/BakuHistoricalData";
 
+import WeatherMap from "./WeatherMapReact";
 import CitySelectNav from "./CitySelectNav";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
         <Route path="/baku-historical" element={<BakuHistoricalData />} />
         <Route path="/tinj" element={<TinjCurrentData />} />
         <Route path="/tinj-historical" element={<TinjHistoricalData />} />
+        <Route path="/weather-map" element={<WeatherMap />} />
       </Routes>
     </div>
   );

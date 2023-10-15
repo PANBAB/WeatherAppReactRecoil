@@ -81,6 +81,13 @@ const CitySelectNav = () => {
             labelPlacement="end"
           />
         ))}
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => navigate("/weather-map")}
+        >
+          Precipitation Map
+        </Button>
       </RadioGroup>
 
       <div style={styles.footer}>

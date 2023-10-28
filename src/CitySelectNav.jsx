@@ -11,6 +11,8 @@ import {
   FormControlLabel,
   Button,
 } from "@mui/material";
+import PublicTwoToneIcon from "@mui/icons-material/PublicTwoTone";
+import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 
 const myLogo = require("./sTORMY.gif");
 const footerLogo = require("./Drizzle.jpg");
@@ -19,12 +21,18 @@ const CitySelectNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
+  const [isFooterOpen, setIsFooterOpen] = useState(true); // State to control footer visibility
 
   const navigate = useNavigate();
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setIsTitleVisible(true);
+  };
+
+  // Function to close the footer completely
+  const handleCloseFooter = () => {
+    setIsFooterOpen(false);
   };
 
   const cities = [
@@ -82,25 +90,21 @@ const CitySelectNav = () => {
           />
         ))}
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={() => navigate("/weather-map")}
         >
-          Precipitation Map
+          Precipitation Map <PublicTwoToneIcon />
         </Button>
       </RadioGroup>
 
-      <div style={styles.footer}>
+      <div
+        style={{ ...styles.footer, display: isFooterOpen ? "flex" : "none" }}
+      >
         <div style={styles.logoContainer}>
           <img src={footerLogo} alt="drizzle" style={styles.footerLogo} />
         </div>
         <div style={styles.footerContent}>
-          <Typography variant="body2" style={styles.footerText}>
-            © 2023 Drizzle Weather App
-          </Typography>
-          <Typography variant="body2" style={styles.footerText}>
-            All rights reserved
-          </Typography>
           <Typography variant="body2" style={styles.footerText}>
             Made with <span style={styles.heart}>❤️</span> by{" "}
             <a
@@ -116,6 +120,14 @@ const CitySelectNav = () => {
               Click to contact me by mail
             </a>
           </Typography>
+          <Button
+            variant="outlined"
+            size="small"
+            color="primary"
+            onClick={handleCloseFooter}
+          >
+            <DisabledByDefaultIcon />
+          </Button>
         </div>
       </div>
     </div>
@@ -127,12 +139,13 @@ const styles = {
     fontFamily: "Arial, sans-serif",
     backgroundColor: null,
   },
-
   modal: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "50%",
+    height: "100%",
   },
   card: {
     maxWidth: 600,
@@ -156,7 +169,6 @@ const styles = {
     textAlign: "left",
     color: "#123",
   },
-
   title: {
     textAlign: "center",
     color: "#333",
@@ -167,11 +179,9 @@ const styles = {
   },
   citySelect: {
     textAlign: "center",
-
     color: "#fca311",
     margin: "1em",
   },
-
   footer: {
     position: "fixed",
     bottom: 0,
@@ -184,6 +194,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     borderTopRightRadius: "100%",
+    flexshrink: 0,
+    zIndex: -3,
   },
   logoContainer: {
     marginLeft: "20px",
@@ -210,9 +222,7 @@ const styles = {
   },
   emailLink: {
     color: "#ee9b00",
-
     textDecoration: "none",
-
     "&:hover": {
       textDecoration: "underline",
     },

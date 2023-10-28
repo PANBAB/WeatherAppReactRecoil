@@ -75,8 +75,8 @@
     <script>
       maptilersdk.config.apiKey = "wW38ZSmwpVtEjAg3K1k0";
       const map = (window.map = new maptilersdk.Map({
-        container: "map", // container's id or the HTML element to render the map
-        style: maptilersdk.MapStyle.BACKDROP, // stylesheet location
+        container: "map",
+        style: maptilersdk.MapStyle.BACKDROP,
         zoom: 2,
         center: [43.5, 16.43],
         hash: true,
@@ -88,7 +88,6 @@
 
       const weatherLayer = new maptilerweather.PrecipitationLayer();
 
-      // Called when the animation is progressing
       weatherLayer.on("tick", (event) => {
         refreshTime();
         updatePointerValue(pointerLngLat);
@@ -107,7 +106,6 @@
         }
       });
 
-      // Update the date time display
       function refreshTime() {
         const d = weatherLayer.getAnimationTimeDate();
         timeTextDiv.innerText = d.toString();

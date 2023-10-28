@@ -25,12 +25,14 @@ body {
   font-family: Arial, sans-serif; 
   background-repeat: no-repeat;
     background-size: cover;
+    flex-direction: column;
+    height: 100%;
 }
 
 h1 {
-  background: linear-gradient(to right, #0077b6, #61aec8, #fff);
+  background: linear-gradient(to right, #2399d8, #6caabf, #fff);
   color: #fff;
-  text-align: center;
+  text-align: start;
   padding: 20px;
   font-size: 24px;
   border-radius: 10px  30px 30px 10px;	

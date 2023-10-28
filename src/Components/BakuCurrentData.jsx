@@ -47,7 +47,6 @@ const BakuCurrentData = () => {
   return (
     <div>
       <div>
-        <h1>Country</h1>
         <AZ className="flagIconContainer" />
       </div>
 

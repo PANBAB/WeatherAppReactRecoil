@@ -12,7 +12,7 @@ import {
   Select,
   InputLabel,
 } from "@mui/material";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import DataThresholdingRoundedIcon from "@mui/icons-material/DataThresholdingRounded";
 
 import WeatherIconComponent from "./WeatherIconComponent";
 import { fetchWeatherData, selectWeatherData } from "../redux/WeatherSlice.jsx";
@@ -150,10 +150,13 @@ const SplitCurrentData = () => {
             );
           })}
         </Grid>
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<DataThresholdingRoundedIcon />}
+        >
           <Link to="/split-historical">Split Historical data</Link>
         </Button>
-        <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
     </div>
   );

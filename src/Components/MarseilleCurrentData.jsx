@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import WeatherIconComponent from "./WeatherIconComponent";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import DataThresholdingRoundedIcon from "@mui/icons-material/DataThresholdingRounded";
 import {
   fetchMarseilleWeatherData,
   selectMarseilleWeatherData,
@@ -160,10 +160,13 @@ const MarseilleCurrentData = () => {
             );
           })}
         </Grid>
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<DataThresholdingRoundedIcon />}
+        >
           <Link to="/Marseille-historical">Marseille Historical data</Link>
         </Button>
-        <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
     </div>
   );

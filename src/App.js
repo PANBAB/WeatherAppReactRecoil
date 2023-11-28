@@ -26,14 +26,6 @@ function App() {
   return (
     <div className="App">
       <CitySelectNav />
-      <p>
-        <b>
-          Drizzle is a weather app made to help you plan your day. It is made in
-          React and uses Axios to fetch weather data from Open-Meteo API.
-          Drizzle uses React Router to navigate between pages and Redux toolkit
-          to manage state.
-        </b>
-      </p>
 
       <Routes>
         <Route path="/" element={<SplitCurrentData />} />

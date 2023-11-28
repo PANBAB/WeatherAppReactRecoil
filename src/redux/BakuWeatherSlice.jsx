@@ -5,7 +5,7 @@ export const fetchBakuWeatherData = createAsyncThunk(
   "BakuWeather/fetchBakuWeatherData",
   async () => {
     const response = await axios.get(
-      "https://api.open-meteo.com/v1/forecast?latitude=40.4093&longitude=49.8671&hourly=temperature_2m,precipitation,weathercode,surface_pressure,windspeed_180m,winddirection_180m,temperature_180m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Asia%2FBaku&forecast_days=7"
+      "https://api.open-meteo.com/v1/forecast?latitude=40.4093&longitude=49.8671&hourly=temperature_2m,precipitation,weathercode,surface_pressure,windspeed_180m,winddirection_180m,temperature_180m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Asia%2FBaku&forecast_days=3"
     );
     return response.data;
   }

@@ -12,7 +12,7 @@ import {
   Select,
   InputLabel,
 } from "@mui/material";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import DataThresholdingRoundedIcon from "@mui/icons-material/DataThresholdingRounded";
 
 import WeatherIconComponent from "./WeatherIconComponent";
 import {
@@ -153,10 +153,13 @@ const PortoCurrentData = () => {
             );
           })}
         </Grid>
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<DataThresholdingRoundedIcon />}
+        >
           <Link to="/porto-historical">Porto Historical data</Link>
         </Button>
-        <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
     </div>
   );

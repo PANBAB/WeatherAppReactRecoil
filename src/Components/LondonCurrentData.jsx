@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import WeatherIconComponent from "./WeatherIconComponent";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import DataThresholdingRoundedIcon from "@mui/icons-material/DataThresholdingRounded";
 import {
   fetchLondonWeatherData,
   selectLondonWeatherData,
@@ -159,10 +159,13 @@ const LondonCurrentData = () => {
             );
           })}
         </Grid>
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<DataThresholdingRoundedIcon />}
+        >
           <Link to="/london-historical">London Historical data</Link>
         </Button>
-        <HistoryRoundedIcon fontSize="large" color="primary" />
       </Grid>
     </div>
   );
